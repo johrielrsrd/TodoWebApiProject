@@ -10,6 +10,6 @@ namespace TodoWebApiProject.Data
 
         }
 
-        public DbSet<ToDo>toDos { get; set; }
+        public DbSet<ToDo>ToDos { get; set; }
     }
 }
