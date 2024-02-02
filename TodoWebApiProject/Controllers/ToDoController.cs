@@ -18,7 +18,7 @@ namespace TodoWebApiProject.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<ToDo>> Get()
         {
-            return _dataContext.ToDos.ToList();
+            return _dataContext.ToDoTable.ToList();
         }
     }
 }
