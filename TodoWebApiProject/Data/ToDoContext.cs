@@ -3,9 +3,9 @@ using TodoWebApiProject.Models;
 
 namespace TodoWebApiProject.Data
 {
-    public class DataContext : DbContext
+    public class ToDoContext : DbContext
     {
-        public DataContext(DbContextOptions<DataContext> options) : base(options)
+        public ToDoContext(DbContextOptions<ToDoContext> options) : base(options)
         {
 
         }
