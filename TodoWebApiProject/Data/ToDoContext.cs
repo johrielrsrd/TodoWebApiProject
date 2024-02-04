@@ -7,9 +7,8 @@ namespace TodoWebApiProject.Data
     {
         public ToDoContext(DbContextOptions<ToDoContext> options) : base(options)
         {
-
         }
 
-        public DbSet<ToDo>ToDoTable { get; set; }
+        public DbSet<ToDo> ToDoTable { get; set; }
     }
 }
