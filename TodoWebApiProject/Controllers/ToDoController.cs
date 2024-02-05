@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TodoWebApiProject.Data;
 using TodoWebApiProject.Models;
 
@@ -41,17 +42,11 @@ namespace TodoWebApiProject.Controllers
         [HttpPut("{id}")]
         public ActionResult<ToDo> PutToDoItem(int id, ToDo newToDoItem)
         {
-            //_dataContext.Entry(newToDoItem).State = EntityState.Modified;
-
-            var existingToDoItem = _dataContext.ToDoTable.Find(id);
-
-            if (existingToDoItem == null)
+            if (id != newToDoItem.Id)
             {
-                return NotFound();
+                return BadRequest();
             }
-
-            existingToDoItem.Text = newToDoItem.Text;
-            existingToDoItem.IsComplete = newToDoItem.IsComplete;
+            _dataContext.Entry(newToDoItem).State = EntityState.Modified;
 
             _dataContext.SaveChanges();
 
