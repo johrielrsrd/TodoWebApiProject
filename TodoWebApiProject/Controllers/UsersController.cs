@@ -24,9 +24,9 @@ namespace TodoWebApiProject.Controllers
         }
 
         [HttpGet("{username}/{password}")]
-        public async Task<ActionResult<IEnumerable<User>>> GetUser(string username, string password)
+        public async Task<ActionResult<User>> GetUser(string username, string password)
         {
-            var user = await _context.Users.Include(u => u.ToDoItems).Where(u => u.UserName == username && u.Password == password).ToListAsync();
+            var user = await _context.Users.Include(u => u.ToDoItems).FirstOrDefaultAsync(u => u.UserName == username && u.Password == password);
 
             if (user == null)
             {
@@ -76,7 +76,7 @@ namespace TodoWebApiProject.Controllers
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.Id }, user);
+            return NoContent();
         }
 
         // DELETE: api/Users/5
