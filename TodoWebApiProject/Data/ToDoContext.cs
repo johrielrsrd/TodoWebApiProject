@@ -9,6 +9,17 @@ namespace TodoWebApiProject.Data
         {
         }
 
-        public DbSet<ToDo> ToDoTable { get; set; }
+        public DbSet<ToDoItem> ToDoItems { get; set; }
+        public DbSet<User> Users { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+                .HasOne(e => e.ToDoItem)
+                .WithOne(e => e.User)
+                .HasForeignKey<ToDoItem>(e => e.ToDoItemId)
+                .IsRequired();
+        }
+
     }
 }

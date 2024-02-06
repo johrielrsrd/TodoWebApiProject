@@ -17,30 +17,30 @@ namespace TodoWebApiProject.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<ToDo>> GetToDoItems()
+        public ActionResult<IEnumerable<ToDoItem>> GetToDoItems()
         {
-            return _dataContext.ToDoTable.ToList();
+            return _dataContext.ToDoItems.ToList();
         }
 
         [HttpGet("{id}")]
-        public ActionResult<ToDo> GetToDoItem(int id)
+        public ActionResult<ToDoItem> GetToDoItem(int id)
         {
-            var existingToDoItem = _dataContext.ToDoTable.Find(id);
+            var existingToDoItem = _dataContext.ToDoItems.Find(id);
 
             return existingToDoItem == null ? NotFound() : existingToDoItem; //conventional? or better to use if statement for better readability?
         }
 
         [HttpPost]
-        public ActionResult<ToDo> PostToDoItem(ToDo todoItem)
+        public ActionResult<ToDoItem> PostToDoItem(ToDoItem todoItem)
         {
-            _dataContext.ToDoTable.Add(todoItem);
+            _dataContext.ToDoItems.Add(todoItem);
             _dataContext.SaveChanges();
 
             return CreatedAtAction(nameof(GetToDoItems), new { id = todoItem.Id }, todoItem); //can use "NoContent()" return? but this is the conventional way?
         }
 
         [HttpPut("{id}")]
-        public ActionResult<ToDo> PutToDoItem(int id, ToDo newToDoItem)
+        public ActionResult<ToDoItem> PutToDoItem(int id, ToDoItem newToDoItem)
         {
             if (id != newToDoItem.Id)
             {
@@ -54,16 +54,16 @@ namespace TodoWebApiProject.Controllers
         }
 
         [HttpDelete("{id}")]
-        public ActionResult<ToDo> DeleteToDoItem(int id)
+        public ActionResult<ToDoItem> DeleteToDoItem(int id)
         {
-            var removeItem = _dataContext.ToDoTable.Find(id);
+            var removeItem = _dataContext.ToDoItems.Find(id);
 
             if (removeItem == null)
             {
                 return NotFound();
             }
 
-            _dataContext.ToDoTable.Remove(removeItem);
+            _dataContext.ToDoItems.Remove(removeItem);
             _dataContext.SaveChanges();
 
             return NoContent();
