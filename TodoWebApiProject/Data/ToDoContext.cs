@@ -15,9 +15,9 @@ namespace TodoWebApiProject.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
-                .HasOne(e => e.ToDoItem)
+                .HasMany(e => e.ToDoItems)
                 .WithOne(e => e.User)
-                .HasForeignKey<ToDoItem>(e => e.ToDoItemId)
+                .HasForeignKey(e => e.ToDoItemId)
                 .IsRequired();
         }
 
