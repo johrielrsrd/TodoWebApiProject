@@ -16,7 +16,7 @@ namespace TodoWebApiProject.Data
         {
             modelBuilder.Entity<User>()
                 .HasMany(e => e.ToDoItems)
-                .WithOne(e => e.User)
+                .WithOne()
                 .HasForeignKey(e => e.ToDoItemId)
                 .IsRequired();
         }
