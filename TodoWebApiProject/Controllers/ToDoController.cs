@@ -22,10 +22,10 @@ namespace TodoWebApiProject.Controllers
             return _dataContext.ToDoItems.ToList();
         }
 
-        [HttpGet("{id}")]
-        public ActionResult<ToDoItem> GetToDoItem(int id)
+        [HttpGet("{todoitemid}")]
+        public ActionResult<IEnumerable<ToDoItem>> GetToDoItem(int todoitemid)
         {
-            var existingToDoItem = _dataContext.ToDoItems.Find(id);
+            var existingToDoItem = _dataContext.ToDoItems.Where(e => e.ToDoItemId == todoitemid).ToList();
 
             return existingToDoItem == null ? NotFound() : existingToDoItem; //conventional? or better to use if statement for better readability?
         }
